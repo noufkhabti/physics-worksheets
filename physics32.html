@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>فيزياء 3-2 | أوراق العمل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f4f7f5; --card:#fff; --text:#111827; --muted:#6b7280;
+      --primary:#6fbf9c; --shadow:0 12px 28px rgba(0,0,0,.08); --radius:20px;
+      --line:rgba(17,24,39,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Tajawal",system-ui;background:var(--bg);color:var(--text)}
+    .wrap{max-width:1100px;margin:auto;padding:18px 16px 60px}
+    .bar{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      background:linear-gradient(135deg,#ffffff,#ecf7f1);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:14px 16px; margin-top:14px;
+      border:1px solid rgba(111,191,156,.18);
+    }
+    .meta{line-height:1.9}
+    .meta .school{font-weight:900}
+    .meta .teacher{color:var(--muted);font-weight:800}
+    .rightBar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .chip{
+      background:#fff;border:1px solid rgba(111,191,156,.22);
+      padding:10px 12px;border-radius:999px;box-shadow:var(--shadow);
+      font-weight:900; font-size:14px;
+    }
+    .btn{
+      border:0;background:var(--card);cursor:pointer;
+      padding:10px 14px;border-radius:999px;box-shadow:var(--shadow);
+      color:var(--text);font-weight:900;
+      border:1px solid rgba(111,191,156,.18);
+      transition:.2s;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .top{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-top:12px;align-items:center}
+    .hero{
+      background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:18px 16px;margin-top:14px;border:1px solid rgba(111,191,156,.18);
+    }
+    h1{margin:0;font-size:24px}
+    .muted{color:var(--muted);line-height:1.9;margin:6px 0 0}
+
+    .controls{
+      display:grid;
+      grid-template-columns: 1.2fr .7fr .7fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    input, select{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:12px 14px;
+      outline:none;
+      background:#fff;
+      font-family:"Tajawal",system-ui;
+    }
+
+    .stats{
+      margin-top:12px;
+      display:flex;gap:10px;flex-wrap:wrap;
+      color:var(--muted);font-size:13px;
+    }
+    .stats b{color:var(--text)}
+
+    .table{
+      margin-top:14px;background:var(--card);border-radius:var(--radius);
+      box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(111,191,156,.18);
+    }
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:14px 12px;border-bottom:1px solid rgba(0,0,0,.06);text-align:right;vertical-align:top}
+    th{background:rgba(111,191,156,.10);font-size:14px}
+    tr:last-child td{border-bottom:0}
+
+    .tag{
+      display:inline-block;
+      padding:6px 10px;border-radius:999px;
+      font-weight:900;font-size:12px;
+      border:1px solid rgba(0,0,0,.06);
+      background:rgba(0,0,0,.04);
+      color:#111827;
+      white-space:nowrap;
+    }
+    .tag.work{background:rgba(111,191,156,.14); color:#0f5132; border-color:rgba(111,191,156,.25)}
+    .tag.review{background:rgba(99,102,241,.14); color:#312e81; border-color:rgba(99,102,241,.22)}
+    .tag.enrich{background:rgba(245,158,11,.18); color:#7c2d12; border-color:rgba(245,158,11,.26)}
+    .tag.test{background:rgba(239,68,68,.14); color:#7f1d1d; border-color:rgba(239,68,68,.22)}
+    .tag.other{background:rgba(148,163,184,.22); color:#0f172a; border-color:rgba(148,163,184,.28)}
+
+    a.link{
+      color:var(--primary);font-weight:900;text-decoration:none;
+      background:rgba(111,191,156,.10);
+      padding:8px 10px;border-radius:999px;display:inline-flex;gap:8px;align-items:center;
+      border:1px solid rgba(111,191,156,.18);
+    }
+    .status{margin-top:10px;color:var(--muted);font-size:13px}
+
+    .cards{display:none;margin-top:14px;gap:12px}
+    .cardItem{
+      background:#fff;border:1px solid rgba(111,191,156,.18);
+      border-radius:18px;box-shadow:var(--shadow);
+      padding:14px 14px;
+    }
+    .cardItem .title{font-weight:900;margin:0 0 8px;font-size:16px}
+    .cardItem .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:13px}
+    .cardItem .row b{color:var(--text)}
+
+    @media (max-width:860px){
+      .controls{grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width:720px){
+      table{display:none;}
+      .table{padding:0;border:none;box-shadow:none;background:transparent}
+      .cards{display:grid;}
+      .controls{grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <div class="meta">
+      <div class="school">الثانوية الأولى في بيشة</div>
+      <div class="teacher">معلمة المادة: نوف خبتي</div>
+    </div>
+    <div class="rightBar">
+      <div class="chip">زيارات الصفحة: <span id="visits">—</span></div>
+      <button class="btn" id="copyBtn">نسخ رابط الصفحة</button>
+    </div>
+  </div>
+
+  <div class="top">
+    <button class="btn" onclick="location.href='index.html'">↩ الرجوع</button>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" onclick="loadData()">⟳ تحديث البيانات</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1 id="pageTitle">فيزياء 3-2 | أوراق العمل التفاعلية</h1>
+    <p class="muted">بحث + فلترة + فرز، وتحديث مباشر من Google Sheet (CSV).</p>
+
+    <div class="controls">
+      <input id="q" placeholder="ابحث باسم الدرس..." oninput="render()" />
+      <select id="typeFilter" onchange="render()">
+        <option value="">كل الأنواع</option>
+      </select>
+      <select id="sortBy" onchange="render()">
+        <option value="newest">الأحدث تحديثًا</option>
+        <option value="oldest">الأقدم تحديثًا</option>
+        <option value="az">أبجديًا (أ-ي)</option>
+        <option value="za">أبجديًا (ي-أ)</option>
+      </select>
+    </div>
+
+    <div class="stats" id="stats">
+      <span>الإجمالي: <b id="total">—</b></span>
+      <span>المعروض: <b id="shown">—</b></span>
+      <span>آخر تحديث (وفق البيانات): <b id="lastUpdate">—</b></span>
+    </div>
+  </div>
+
+  <div class="table">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:44%">اسم الدرس</th>
+          <th style="width:18%">النوع</th>
+          <th style="width:18%">آخر تحديث</th>
+          <th style="width:20%">الرابط</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="cards" id="cards"></div>
+  </div>
+
+  <div class="status" id="status">—</div>
+</div>
+
+<script>
+  const PAGE_TITLE = "فيزياء 3-2 | أوراق العمل التفاعلية";
+  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR_Jp5WeJe4svYAw-NhKRc20jKG2FDRmeqtxMGMFK4EvmPe-RokObGgzH4QpERroDgIGtjPt5mpapTu/pub?output=csv";
+  const COUNT_NAMESPACE = "nouf-bisha-physics";
+  const COUNT_KEY = "physics-3-2";
+
+  document.getElementById("pageTitle").textContent = PAGE_TITLE;
+
+  let items = [];
+
+  function parseCSV(text){
+    const rows = [];
+    let row = [], cur = "", inQuotes = false;
+    for (let i=0; i<text.length; i++){
+      const c = text[i], next = text[i+1];
+      if (c === '"'){
+        if (inQuotes && next === '"'){ cur += '"'; i++; }
+        else inQuotes = !inQuotes;
+      } else if (c === ',' && !inQuotes){
+        row.push(cur); cur = "";
+      } else if ((c === '\n' || c === '\r') && !inQuotes){
+        if (c === '\r' && next === '\n') i++;
+        row.push(cur); rows.push(row);
+        row = []; cur = "";
+      } else cur += c;
+    }
+    if (cur.length || row.length){ row.push(cur); rows.push(row); }
+    const headers = (rows.shift() || []).map(h => h.trim());
+    return rows.filter(r => r.some(cell => (cell||"").trim() !== "")).map(r=>{
+      const obj = {};
+      headers.forEach((h,idx)=> obj[h] = (r[idx]||"").trim());
+      return obj;
+    });
+  }
+
+  const safe = v => (v ?? "").toString().trim();
+
+  function normalizeType(t){
+    const s = safe(t).toLowerCase();
+    if (s.includes("ورقة") || s.includes("worksheet") || s.includes("نشاط")) return {key:"work", label: safe(t) || "ورقة عمل"};
+    if (s.includes("مراج") || s.includes("review")) return {key:"review", label: safe(t) || "مراجعة"};
+    if (s.includes("إثر") || s.includes("اثر") || s.includes("enrich")) return {key:"enrich", label: safe(t) || "إثراء"};
+    if (s.includes("اختبار") || s.includes("quiz") || s.includes("test")) return {key:"test", label: safe(t) || "اختبار"};
+    return {key:"other", label: safe(t) || "—"};
+  }
+
+  function parseDateLoose(v){
+    const s = safe(v);
+    if (!s) return null;
+    const d1 = new Date(s);
+    if (!isNaN(d1)) return d1;
+    const m = s.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
+    if (m){
+      const d2 = new Date(+m[1], +m[2]-1, +m[3]);
+      if (!isNaN(d2)) return d2;
+    }
+    const m2 = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+    if (m2){
+      const d3 = new Date(+m2[3], +m2[2]-1, +m2[1]);
+      if (!isNaN(d3)) return d3;
+    }
+    return null;
+  }
+
+  function formatDate(d){
+    if (!d) return "—";
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,"0");
+    const da = String(d.getDate()).padStart(2,"0");
+    return `${y}-${m}-${da}`;
+  }
+
+  function buildTypeFilter(){
+    const select = document.getElementById("typeFilter");
+    const current = select.value;
+    const set = new Set();
+    items.forEach(it=>{
+      const type = safe(it["النوع"] || it["Type"]);
+      if (type) set.add(type);
+    });
+    select.innerHTML = `<option value="">كل الأنواع</option>`;
+    [...set].sort((a,b)=> a.localeCompare(b,"ar")).forEach(t=>{
+      const opt = document.createElement("option");
+      opt.value = t;
+      opt.textContent = t;
+      select.appendChild(opt);
+    });
+    if ([...select.options].some(o=>o.value===current)) select.value = current;
+  }
+
+  function computeLastUpdate(list){
+    const dates = list.map(it => parseDateLoose(it["آخر تحديث"] || it["Updated"])).filter(Boolean);
+    if (!dates.length) return null;
+    dates.sort((a,b)=> b-a);
+    return dates[0];
+  }
+
+  function render(){
+    const q = document.getElementById("q").value.trim().toLowerCase();
+    const typeFilter = document.getElementById("typeFilter").value;
+    const sortBy = document.getElementById("sortBy").value;
+
+    let filtered = items.filter(it=>{
+      const lesson = safe(it["اسم الدرس"] || it["Lesson"]).toLowerCase();
+      const type   = safe(it["النوع"] || it["Type"]);
+      const typeOk = !typeFilter || type === typeFilter;
+      const qOk = !q || lesson.includes(q) || type.toLowerCase().includes(q);
+      return typeOk && qOk;
+    });
+
+    const getLesson = it => safe(it["اسم الدرس"] || it["Lesson"]);
+    const getDate = it => parseDateLoose(it["آخر تحديث"] || it["Updated"]);
+
+    if (sortBy === "az") filtered.sort((a,b)=> getLesson(a).localeCompare(getLesson(b),"ar"));
+    else if (sortBy === "za") filtered.sort((a,b)=> getLesson(b).localeCompare(getLesson(a),"ar"));
+    else if (sortBy === "oldest") filtered.sort((a,b)=> (getDate(a)||0) - (getDate(b)||0));
+    else filtered.sort((a,b)=> (getDate(b)||0) - (getDate(a)||0));
+
+    document.getElementById("total").textContent = items.length;
+    document.getElementById("shown").textContent = filtered.length;
+
+    const last = computeLastUpdate(items);
+    document.getElementById("lastUpdate").textContent = last ? formatDate(last) : "—";
+
+    const tbody = document.getElementById("rows");
+    tbody.innerHTML = "";
+
+    const cards = document.getElementById("cards");
+    cards.innerHTML = "";
+
+    filtered.forEach(it=>{
+      const lesson = safe(it["اسم الدرس"] || it["Lesson"]);
+      const rawType = safe(it["النوع"] || it["Type"]);
+      const {key:tagKey, label:tagLabel} = normalizeType(rawType);
+      const link   = safe(it["الرابط"] || it["Link"]);
+      const dateV  = safe(it["آخر تحديث"] || it["Updated"]);
+      const dateD  = parseDateLoose(dateV);
+      const dateF  = dateD ? formatDate(dateD) : (dateV || "—");
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><strong>${lesson || "—"}</strong></td>
+        <td><span class="tag ${tagKey}">${tagLabel}</span></td>
+        <td>${dateF}</td>
+        <td>${link ? `<a class="link" href="${link}" target="_blank" rel="noopener">عرض</a>` : "—"}</td>
+      `;
+      tbody.appendChild(tr);
+
+      const div = document.createElement("div");
+      div.className = "cardItem";
+      div.innerHTML = `
+        <div class="title">${lesson || "—"}</div>
+        <div class="row"><span class="tag ${tagKey}">${tagLabel}</span></div>
+        <div class="row">آخر تحديث: <b>${dateF}</b></div>
+        <div class="row">${link ? `<a class="link" href="${link}" target="_blank" rel="noopener">عرض الورقة</a>` : "—"}</div>
+      `;
+      cards.appendChild(div);
+    });
+
+    document.getElementById("status").textContent =
+      filtered.length ? `تم عرض ${filtered.length} عنصر.` : "لا توجد نتائج مطابقة.";
+  }
+
+  async function loadData(){
+    try{
+      document.getElementById("status").textContent = "جاري تحميل البيانات...";
+      const res = await fetch(CSV_URL, {cache:"no-store"});
+      const text = await res.text();
+      items = parseCSV(text);
+      buildTypeFilter();
+      render();
+    }catch(e){
+      document.getElementById("status").textContent =
+        "تعذر تحميل البيانات. تأكدي من نشر الشيت للويب وأن رابط CSV صحيح.";
+    }
+  }
+
+  fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(COUNT_NAMESPACE)}/${encodeURIComponent(COUNT_KEY)}`)
+    .then(r => r.json())
+    .then(d => document.getElementById("visits").textContent = d.value)
+    .catch(()=> document.getElementById("visits").textContent = "—");
+
+  document.getElementById("copyBtn").addEventListener("click", async ()=>{
+    try{
+      await navigator.clipboard.writeText(location.href);
+      document.getElementById("copyBtn").textContent = "تم النسخ ✓";
+      setTimeout(()=> document.getElementById("copyBtn").textContent = "نسخ رابط الصفحة", 1400);
+    }catch{
+      alert("تعذر النسخ تلقائيًا. انسخي الرابط من شريط العنوان.");
+    }
+  });
+
+  loadData();
+</script>
+</body>
+</html>
