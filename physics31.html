@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>فيزياء 3-1 | أوراق العمل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f4f7f5; --card:#fff; --text:#111827; --muted:#6b7280;
+      --primary:#6fbf9c; --shadow:0 12px 28px rgba(0,0,0,.08); --radius:20px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Tajawal",system-ui;background:var(--bg);color:var(--text)}
+    .wrap{max-width:1100px;margin:auto;padding:18px 16px 60px}
+    .bar{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      background:linear-gradient(135deg,#ffffff,#ecf7f1);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:14px 16px; margin-top:14px;
+    }
+    .meta{line-height:1.9}
+    .meta .school{font-weight:900}
+    .meta .teacher{color:var(--muted);font-weight:800}
+    .counter{
+      background:#fff;border:1px solid rgba(111,191,156,.22);
+      padding:10px 12px;border-radius:999px;box-shadow:var(--shadow);
+      font-weight:900;
+    }
+    .top{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-top:12px}
+    .btn{
+      border:0;background:var(--card);cursor:pointer;
+      padding:10px 14px;border-radius:999px;box-shadow:var(--shadow);
+      color:var(--text);font-weight:900;
+    }
+    .hero{
+      background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:22px 18px;margin-top:14px;border:1px solid rgba(111,191,156,.18);
+    }
+    h1{margin:0;font-size:26px}
+    .muted{color:var(--muted);line-height:1.9;margin:6px 0 0}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    input{
+      flex:1;min-width:220px;border:1px solid rgba(0,0,0,.08);
+      border-radius:999px;padding:12px 14px;outline:none;background:#fff;
+    }
+    .table{
+      margin-top:14px;background:var(--card);border-radius:var(--radius);
+      box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(111,191,156,.18);
+    }
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:14px 12px;border-bottom:1px solid rgba(0,0,0,.06);text-align:right}
+    th{background:rgba(111,191,156,.10);font-size:14px}
+    tr:last-child td{border-bottom:0}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;
+      background:rgba(111,191,156,.12);color:var(--primary);font-weight:900;font-size:12px}
+    a.link{color:var(--primary);font-weight:900;text-decoration:none;
+      background:rgba(111,191,156,.10);padding:8px 10px;border-radius:999px;display:inline-block}
+    .status{margin-top:10px;color:var(--muted);font-size:13px}
+    @media (max-width:720px){
+      th:nth-child(3), td:nth-child(3){display:none;}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <div class="meta">
+      <div class="school">الثانوية الأولى في بيشة</div>
+      <div class="teacher">معلمة المادة: نوف خبتي</div>
+    </div>
+    <div class="counter">زيارات الصفحة: <span id="visits">—</span></div>
+  </div>
+
+  <div class="top">
+    <button class="btn" onclick="location.href='index.html'">↩ الرجوع</button>
+    <button class="btn" onclick="loadData()">⟳ تحديث البيانات</button>
+  </div>
+
+  <div class="hero">
+    <h1>فيزياء 3-1 | أوراق العمل التفاعلية</h1>
+    <p class="muted">القائمة تُحدَّث تلقائيًا من Google Sheet المنشور بصيغة CSV.</p>
+    <div class="controls">
+      <input id="q" placeholder="ابحث باسم الدرس أو النوع..." oninput="render()" />
+    </div>
+  </div>
+
+  <div class="table">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:40%">اسم الدرس</th>
+          <th style="width:20%">النوع</th>
+          <th style="width:20%">آخر تحديث</th>
+          <th style="width:20%">الرابط</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="status" id="status">—</div>
+</div>
+
+<script>
+  // ✅ رابط CSV لفيزياء 3-1 (رابطك)
+  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYwDr80WC-23IpjKJhqTf9tzAzaR6QevvecVv3kA6ElEVhkTjsBC8pA6hbatqma68evJ0wGKC4W0j0/pub?output=csv";
+
+  let items = [];
+
+  function parseCSV(text){
+    const rows = [];
+    let row = [], cur = "", inQuotes = false;
+
+    for (let i=0; i<text.length; i++){
+      const c = text[i], next = text[i+1];
+      if (c === '"'){
+        if (inQuotes && next === '"'){ cur += '"'; i++; }
+        else inQuotes = !inQuotes;
+      } else if (c === ',' && !inQuotes){
+        row.push(cur); cur = "";
+      } else if ((c === '\n' || c === '\r') && !inQuotes){
+        if (c === '\r' && next === '\n') i++;
+        row.push(cur); rows.push(row);
+        row = []; cur = "";
+      } else {
+        cur += c;
+      }
+    }
+    if (cur.length || row.length){ row.push(cur); rows.push(row); }
+
+    const headers = (rows.shift() || []).map(h => h.trim());
+    return rows
+      .filter(r => r.some(cell => (cell||"").trim() !== ""))
+      .map(r=>{
+        const obj = {};
+        headers.forEach((h,idx)=> obj[h] = (r[idx]||"").trim());
+        return obj;
+      });
+  }
+
+  const safe = v => (v ?? "").toString();
+
+  function render(){
+    const q = document.getElementById("q").value.trim().toLowerCase();
+    const tbody = document.getElementById("rows");
+    tbody.innerHTML = "";
+
+    const filtered = items.filter(it=>{
+      const lesson = safe(it["اسم الدرس"] || it["Lesson"]).toLowerCase();
+      const type   = safe(it["النوع"] || it["Type"]).toLowerCase();
+      return !q || lesson.includes(q) || type.includes(q);
+    });
+
+    filtered.forEach(it=>{
+      const lesson = safe(it["اسم الدرس"] || it["Lesson"]);
+      const type   = safe(it["النوع"] || it["Type"]);
+      const link   = safe(it["الرابط"] || it["Link"]);
+      const date   = safe(it["آخر تحديث"] || it["Updated"]);
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><strong>${lesson || "—"}</strong></td>
+        <td><span class="pill">${type || "—"}</span></td>
+        <td>${date || "—"}</td>
+        <td>${link ? `<a class="link" href="${link}" target="_blank" rel="noopener">عرض</a>` : "—"}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById("status").textContent =
+      `عدد الأوراق المعروضة: ${filtered.length} من ${items.length}`;
+  }
+
+  async function loadData(){
+    try{
+      document.getElementById("status").textContent = "جاري تحميل البيانات...";
+      const res = await fetch(CSV_URL, {cache:"no-store"});
+      const text = await res.text();
+      items = parseCSV(text);
+      render();
+    }catch(e){
+      document.getElementById("status").textContent =
+        "تعذر تحميل البيانات. تأكدي من نشر الشيت للويب وأن رابط CSV صحيح.";
+    }
+  }
+
+  // ✅ عداد زوار خاص بصفحة 3-1
+  const NAMESPACE = "nouf-bisha-physics";
+  const KEY = "physics-3-1";
+  fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(KEY)}`)
+    .then(r => r.json())
+    .then(d => document.getElementById("visits").textContent = d.value)
+    .catch(()=> document.getElementById("visits").textContent = "—");
+
+  loadData();
+</script>
+</body>
+</html>
