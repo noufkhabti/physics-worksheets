@@ -7,41 +7,49 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f4f7f5; --card:#fff; --text:#111827; --muted:#6b7280;
-      --primary:#6fbf9c; --shadow:0 12px 28px rgba(0,0,0,.08); --radius:20px;
+      --bg:#fff3f8; --card:#fff; --text:#111827; --muted:#6b7280;
+      --pink:#ff7aa2; --purple:#a78bfa; --mint:#6fbf9c;
+      --shadow:0 12px 28px rgba(0,0,0,.08); --radius:20px;
       --line:rgba(17,24,39,.08);
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:"Tajawal",system-ui;background:var(--bg);color:var(--text)}
     .wrap{max-width:1100px;margin:auto;padding:18px 16px 60px}
+
     .bar{
       display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
-      background:linear-gradient(135deg,#ffffff,#ecf7f1);
+      background:linear-gradient(135deg,#ffffff,#ffe8f1);
       border-radius:var(--radius); box-shadow:var(--shadow);
       padding:14px 16px; margin-top:14px;
-      border:1px solid rgba(111,191,156,.18);
+      border:1px solid rgba(255,122,162,.20);
     }
     .meta{line-height:1.9}
     .meta .school{font-weight:900}
     .meta .teacher{color:var(--muted);font-weight:800}
+
     .rightBar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .chip{
-      background:#fff;border:1px solid rgba(111,191,156,.22);
+      background:#fff;border:1px solid rgba(255,122,162,.25);
       padding:10px 12px;border-radius:999px;box-shadow:var(--shadow);
       font-weight:900; font-size:14px;
+      display:flex;align-items:center;gap:10px;
     }
+    .chip img{height:20px;display:block}
+
     .btn{
       border:0;background:var(--card);cursor:pointer;
       padding:10px 14px;border-radius:999px;box-shadow:var(--shadow);
       color:var(--text);font-weight:900;
-      border:1px solid rgba(111,191,156,.18);
+      border:1px solid rgba(167,139,250,.22);
       transition:.2s;
     }
     .btn:hover{transform:translateY(-2px)}
+
     .top{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-top:12px;align-items:center}
+
     .hero{
       background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
-      padding:18px 16px;margin-top:14px;border:1px solid rgba(111,191,156,.18);
+      padding:18px 16px;margin-top:14px;border:1px solid rgba(167,139,250,.22);
     }
     h1{margin:0;font-size:24px}
     .muted{color:var(--muted);line-height:1.9;margin:6px 0 0}
@@ -71,11 +79,11 @@
 
     .table{
       margin-top:14px;background:var(--card);border-radius:var(--radius);
-      box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(111,191,156,.18);
+      box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(255,122,162,.18);
     }
     table{width:100%;border-collapse:collapse}
     th,td{padding:14px 12px;border-bottom:1px solid rgba(0,0,0,.06);text-align:right;vertical-align:top}
-    th{background:rgba(111,191,156,.10);font-size:14px}
+    th{background:rgba(167,139,250,.12);font-size:14px}
     tr:last-child td{border-bottom:0}
 
     .tag{
@@ -84,32 +92,38 @@
       font-weight:900;font-size:12px;
       border:1px solid rgba(0,0,0,.06);
       background:rgba(0,0,0,.04);
-      color:#111827;
       white-space:nowrap;
     }
-    .tag.work{background:rgba(111,191,156,.14); color:#0f5132; border-color:rgba(111,191,156,.25)}
-    .tag.review{background:rgba(99,102,241,.14); color:#312e81; border-color:rgba(99,102,241,.22)}
-    .tag.enrich{background:rgba(245,158,11,.18); color:#7c2d12; border-color:rgba(245,158,11,.26)}
-    .tag.test{background:rgba(239,68,68,.14); color:#7f1d1d; border-color:rgba(239,68,68,.22)}
+    .tag.work{background:rgba(111,191,156,.18); color:#0f5132; border-color:rgba(111,191,156,.25)}
+    .tag.review{background:rgba(167,139,250,.18); color:#4c1d95; border-color:rgba(167,139,250,.25)}
+    .tag.enrich{background:rgba(255,122,162,.18); color:#9d174d; border-color:rgba(255,122,162,.25)}
+    .tag.test{background:rgba(251,113,133,.18); color:#7f1d1d; border-color:rgba(251,113,133,.24)}
     .tag.other{background:rgba(148,163,184,.22); color:#0f172a; border-color:rgba(148,163,184,.28)}
 
     a.link{
-      color:var(--primary);font-weight:900;text-decoration:none;
-      background:rgba(111,191,156,.10);
+      color:#b4235a;font-weight:900;text-decoration:none;
+      background:rgba(255,122,162,.12);
       padding:8px 10px;border-radius:999px;display:inline-flex;gap:8px;align-items:center;
-      border:1px solid rgba(111,191,156,.18);
+      border:1px solid rgba(255,122,162,.18);
     }
     .status{margin-top:10px;color:var(--muted);font-size:13px}
 
     .cards{display:none;margin-top:14px;gap:12px}
     .cardItem{
-      background:#fff;border:1px solid rgba(111,191,156,.18);
+      background:#fff;border:1px solid rgba(167,139,250,.18);
       border-radius:18px;box-shadow:var(--shadow);
       padding:14px 14px;
     }
     .cardItem .title{font-weight:900;margin:0 0 8px;font-size:16px}
     .cardItem .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:13px}
     .cardItem .row b{color:var(--text)}
+
+    .footer{
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
 
     @media (max-width:860px){
       .controls{grid-template-columns: 1fr 1fr; }
@@ -131,21 +145,25 @@
       <div class="teacher">معلمة المادة: نوف خبتي</div>
     </div>
     <div class="rightBar">
-      <div class="chip">زيارات الصفحة: <span id="visits">—</span></div>
+      <div class="chip">
+        <span>الزيارات</span>
+        <img
+          src="https://api.visitorbadge.io/api/visitors?path=nouf-bisha-physics-3-1&style=flat&labelColor=%23a78bfa&countColor=%23ff7aa2"
+          alt="visitors"
+        />
+      </div>
       <button class="btn" id="copyBtn">نسخ رابط الصفحة</button>
     </div>
   </div>
 
   <div class="top">
     <button class="btn" onclick="location.href='index.html'">↩ الرجوع</button>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn" onclick="loadData()">⟳ تحديث البيانات</button>
-    </div>
+    <button class="btn" onclick="loadData()">⟳ تحديث القائمة</button>
   </div>
 
   <div class="hero">
-    <h1 id="pageTitle">فيزياء 3-1 | أوراق العمل التفاعلية</h1>
-    <p class="muted">بحث + فلترة + فرز، وتحديث مباشر من Google Sheet (CSV).</p>
+    <h1>فيزياء 3-1 | أوراق العمل التفاعلية</h1>
+    <p class="muted">ابحثي، فلّري حسب النوع، وفرزي القائمة بالطريقة التي تناسبك.</p>
 
     <div class="controls">
       <input id="q" placeholder="ابحث باسم الدرس..." oninput="render()" />
@@ -160,7 +178,7 @@
       </select>
     </div>
 
-    <div class="stats" id="stats">
+    <div class="stats">
       <span>الإجمالي: <b id="total">—</b></span>
       <span>المعروض: <b id="shown">—</b></span>
       <span>آخر تحديث (وفق البيانات): <b id="lastUpdate">—</b></span>
@@ -183,16 +201,12 @@
   </div>
 
   <div class="status" id="status">—</div>
+
+  <div class="footer">جميع الحقوق محفوظة © نوف خبتي</div>
 </div>
 
 <script>
-  const PAGE_TITLE = "فيزياء 3-1 | أوراق العمل التفاعلية";
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYwDr80WC-23IpjKJhqTf9tzAzaR6QevvecVv3kA6ElEVhkTjsBC8pA6hbatqma68evJ0wGKC4W0j0/pub?output=csv";
-  const COUNT_NAMESPACE = "nouf-bisha-physics";
-  const COUNT_KEY = "physics-3-1";
-
-  document.getElementById("pageTitle").textContent = PAGE_TITLE;
-
   let items = [];
 
   function parseCSV(text){
@@ -305,13 +319,11 @@
 
     document.getElementById("total").textContent = items.length;
     document.getElementById("shown").textContent = filtered.length;
-
     const last = computeLastUpdate(items);
     document.getElementById("lastUpdate").textContent = last ? formatDate(last) : "—";
 
     const tbody = document.getElementById("rows");
     tbody.innerHTML = "";
-
     const cards = document.getElementById("cards");
     cards.innerHTML = "";
 
@@ -361,11 +373,6 @@
         "تعذر تحميل البيانات. تأكدي من نشر الشيت للويب وأن رابط CSV صحيح.";
     }
   }
-
-  fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(COUNT_NAMESPACE)}/${encodeURIComponent(COUNT_KEY)}`)
-    .then(r => r.json())
-    .then(d => document.getElementById("visits").textContent = d.value)
-    .catch(()=> document.getElementById("visits").textContent = "—");
 
   document.getElementById("copyBtn").addEventListener("click", async ()=>{
     try{
