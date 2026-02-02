@@ -7,60 +7,79 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f4f7f5; --card:#fff; --text:#111827; --muted:#6b7280;
-      --primary:#6fbf9c; --shadow:0 12px 28px rgba(0,0,0,.08); --radius:22px;
+      /* 🎀 ألوان فرِحة */
+      --bg:#fff3f8;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+
+      --primary:#ff7aa2;  /* وردي */
+      --accent:#a78bfa;   /* ليلكي */
+      --mint:#6fbf9c;     /* نعناعي */
+
+      --shadow:0 12px 28px rgba(0,0,0,.08);
+      --radius:22px;
       --line:rgba(17,24,39,.08);
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:"Tajawal",system-ui;background:var(--bg);color:var(--text)}
     .wrap{max-width:1100px;margin:auto;padding:18px 16px 60px}
+
     .bar{
       display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
-      background:linear-gradient(135deg,#ffffff,#ecf7f1);
+      background:linear-gradient(135deg,#ffffff,#ffe8f1);
       border-radius:var(--radius); box-shadow:var(--shadow);
-      padding:14px 16px; margin-top:14px; border:1px solid rgba(111,191,156,.18);
+      padding:14px 16px; margin-top:14px; border:1px solid rgba(255,122,162,.20);
     }
     .meta{line-height:1.9}
     .meta .school{font-weight:900}
     .meta .teacher{color:var(--muted);font-weight:800}
+
     .rightBar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .chip{
-      background:#fff;border:1px solid rgba(111,191,156,.22);
+      background:#fff;border:1px solid rgba(255,122,162,.25);
       padding:10px 12px;border-radius:999px;box-shadow:var(--shadow);
       font-weight:900; font-size:14px;
+      display:flex;align-items:center;gap:10px;
     }
+    .chip img{height:20px;display:block}
+
     .btn{
       border:0;background:var(--card);cursor:pointer;
       padding:10px 14px;border-radius:999px;box-shadow:var(--shadow);
-      color:var(--text);font-weight:900;border:1px solid rgba(111,191,156,.18);
+      color:var(--text);font-weight:900;border:1px solid rgba(255,122,162,.20);
       transition:.2s;
     }
     .btn:hover{transform:translateY(-2px)}
+
     .hero{
       background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
       padding:22px 18px;margin-top:14px;text-align:center;
-      border:1px solid rgba(111,191,156,.18);
+      border:1px solid rgba(167,139,250,.22);
     }
     h1{margin:0 0 8px;font-size:30px}
     .hero p{margin:0 auto;color:var(--muted);max-width:820px;line-height:1.95}
+
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:18px}
     .card{
       background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
-      padding:22px;cursor:pointer;transition:.25s;border:1px solid rgba(111,191,156,.18);
+      padding:22px;cursor:pointer;transition:.25s;border:1px solid rgba(167,139,250,.20);
       position:relative; overflow:hidden;
     }
     .card::after{
       content:""; position:absolute; inset:-40px -40px auto auto;
       width:120px; height:120px; border-radius:50%;
-      background:rgba(111,191,156,.10);
+      background:rgba(255,122,162,.12);
     }
     .card:hover{transform:translateY(-5px)}
     .tag{
-      display:inline-block;background:rgba(111,191,156,.12);color:var(--primary);
+      display:inline-block;background:rgba(255,122,162,.14);color:#b4235a;
       padding:6px 10px;border-radius:999px;font-weight:900;font-size:13px;margin-bottom:8px
     }
+    .tag.p2{background:rgba(167,139,250,.16);color:#4c1d95}
     .card h2{margin:6px 0 6px;font-size:22px}
     .card p{margin:0;color:var(--muted);line-height:1.85}
+
     .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
   </style>
 </head>
@@ -72,8 +91,17 @@
         <div class="school">الثانوية الأولى في بيشة</div>
         <div class="teacher">معلمة المادة: نوف خبتي</div>
       </div>
+
       <div class="rightBar">
-        <div class="chip">عدد الزيارات: <span id="visits">—</span></div>
+        <div class="chip">
+          <span>الزيارات</span>
+          <!-- ✅ عداد شغال كصورة Badge -->
+          <img
+            src="https://api.visitorbadge.io/api/visitors?path=nouf-bisha-physics-home&style=flat&labelColor=%23ff7aa2&countColor=%236fbf9c"
+            alt="visitors"
+          />
+        </div>
+
         <button class="btn" id="copyBtn">نسخ رابط الصفحة</button>
       </div>
     </div>
@@ -90,28 +118,20 @@
       <div class="card" onclick="location.href='physics31.html'">
         <div class="tag">Phys 3-1</div>
         <h2>فيزياء 3-1</h2>
-        <p>بحث + فلترة + فرز + تحديث مباشر من الشيت</p>
+        <p>بحث + فلترة + فرز + عرض مناسب للجوال والآيباد</p>
       </div>
 
       <div class="card" onclick="location.href='physics32.html'">
-        <div class="tag">Phys 3-2</div>
+        <div class="tag p2">Phys 3-2</div>
         <h2>فيزياء 3-2</h2>
-        <p>بطاقات للجوال + وسوم ملونة + إحصاءات</p>
+        <p>وسوم ملونة + بطاقات للجوال + إحصاءات سريعة</p>
       </div>
     </div>
 
-    <div class="footer">© جميع الحقوق محفوظة</div>
+    <div class="footer">© نوف خبتي</div>
   </div>
 
   <script>
-    // عداد زيارات
-    const NAMESPACE = "nouf-bisha-physics";
-    const KEY = "home";
-    fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(KEY)}`)
-      .then(r => r.json())
-      .then(d => document.getElementById("visits").textContent = d.value)
-      .catch(()=> document.getElementById("visits").textContent = "—");
-
     // نسخ رابط الصفحة
     document.getElementById("copyBtn").addEventListener("click", async ()=>{
       try{
